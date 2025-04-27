@@ -8,6 +8,12 @@ Features
 	•	🔒 Error handling and input validation
 	•	📦 Serverless Framework deployment
 
+	
+## Who Is This For?  
+- **ML Engineers**: Simplify LLM deployment without managing Kubernetes or EC2 instances.  
+- **DevOps Teams**: Implement scalable AI endpoints with serverless best practices.  
+- **Startups**: Reduce cloud costs while maintaining production-ready performance.  	
+
 Setup
 	1.	Clone this repository:
 
