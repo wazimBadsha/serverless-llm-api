@@ -1,0 +1,8 @@
+serverless-llm-api/
+├── Dockerfile
+├── package.json
+├── lambda.js
+├── serverless.yml
+├── .dockerignore
+├── .gitignore
+└── README.md

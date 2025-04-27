@@ -1,0 +1,25 @@
+service: serverless-llm-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: us-east-1
+  timeout: 900 # 15 minutes (max Lambda timeout)
+  memorySize: 10240 # 10GB (max Lambda memory)
+
+functions:
+  classify:
+    image:
+      name: aws-lambda-nodejs:18
+      command: lambda.handler
+    environment:
+      NODE_ENV: production
+      HF_MODEL_CACHE: "/tmp/hf-cache"
+    events:
+      - httpApi:
+          path: /classify
+          method: post
+
+# Required for larger Docker images
+package:
+  artifact: ./image.zip

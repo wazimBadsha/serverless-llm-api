@@ -1,0 +1,17 @@
+{
+    "name": "serverless-llm-api",
+    "version": "1.0.0",
+    "description": "Serverless LLM API with Node.js and AWS Lambda",
+    "main": "lambda.js",
+    "scripts": {
+        "deploy": "serverless deploy"
+    },
+    "dependencies": {
+        "@huggingface/transformers": "^2.4.0",
+        "aws-lambda-helper": "^1.1.0",
+        "dotenv": "^16.3.1"
+    },
+    "devDependencies": {
+        "serverless": "^3.35.0"
+    }
+}
