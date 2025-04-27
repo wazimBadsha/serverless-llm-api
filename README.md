@@ -1,73 +1,91 @@
-Serverless LLM API with Node.js and AWS Lambda
+```markdown
+# Serverless LLM API with Node.js and AWS Lambda
 
-A template for deploying Large Language Models (LLMs) as serverless APIs using AWS Lambda and Docker.
+A production-ready template for deploying Large Language Models (LLMs) as serverless APIs using AWS Lambda and Docker. Ideal for scalable, cost-efficient AI inference.
 
-Features
-	•	🐳 Dockerized inference pipeline
-	•	⚡ Cold-start optimization
-	•	🔒 Error handling and input validation
-	•	📦 Serverless Framework deployment
+[![Medium Article](https://img.shields.io/badge/📖_Read_Medium_Article-gray?logo=medium)](https://medium.com/@muhammadbadhusha/building-scalable-llm-powered-apis-with-node-js-and-aws-lambda-a-serverless-guide-1057a6b0fb0d)
 
-	
-## Who Is This For?  
-- **ML Engineers**: Simplify LLM deployment without managing Kubernetes or EC2 instances.  
-- **DevOps Teams**: Implement scalable AI endpoints with serverless best practices.  
-- **Startups**: Reduce cloud costs while maintaining production-ready performance.  	
+## Features
+- 🐳 **Dockerized** pipeline for models up to 10GB
+- ⚡ **Cold-start optimization** with model pre-loading
+- 🔒 **Input validation** and error handling
+- 📦 **Serverless Framework** deployment
 
-Setup
-	1.	Clone this repository:
+## 👥 Who Is This For?
+- **ML Engineers**: Simplify LLM deployment without Kubernetes/EC2
+- **DevOps Teams**: Scalable AI endpoints with serverless best practices
+- **Startups**: Reduce cloud costs while maintaining performance
 
-git clone https://github.com/your-username/serverless-llm-api.git
-cd serverless-llm-api
+## 🛠️ Project Structure
+```
+serverless-llm-api/
+├── Dockerfile            # Docker config with model caching
+├── lambda.js             # Lambda function with Hugging Face pipeline
+├── serverless.yml        # AWS Lambda deployment config
+├── package.json          # Node.js dependencies
+└── README.md             # You are here!
+```
 
+## 🚀 Setup
 
-	2.	Install dependencies:
+### Prerequisites
+- Node.js 18+
+- AWS CLI configured
+- Docker installed
+- Serverless Framework (`npm install -g serverless`)
 
-npm install
+1. **Clone the repo**:
+   ```bash
+   git clone https://github.com/your-username/serverless-llm-api.git
+   cd serverless-llm-api
+   ```
 
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-	3.	Configure AWS credentials:
+3. **Deploy to AWS**:
+   ```bash
+   npm run deploy
+   ```
 
-aws configure
-
-
-	4.	Deploy:
-
-npm run deploy
-
-
-
-Usage
-
-Send a POST request to your deployed API:
-
+## 🌟 Usage
+```bash
 curl -X POST https://YOUR_API_URL/classify \
   -H "Content-Type: application/json" \
-  -d '{"text": "Serverless machine learning is amazing!"}'
+  -d '{"text": "Serverless machine learning is revolutionary!"}'
+```
 
-License
+**Example Response**:
+```json
+[{
+  "label": "POSITIVE",
+  "score": 0.998
+}]
+```
 
-MIT License
+## ⚙️ Configuration
+Key settings in `serverless.yml`:
+```yaml
+memorySize: 10240  # 10GB (AWS Lambda max)
+timeout: 900       # 15-minute timeout
+```
 
-⸻
+## 🔄 Customization
+To use different models (e.g., GPT-2, Llama 2):
+1. Update `Dockerfile`:
+   ```dockerfile
+   RUN npx transformers-cli download MODEL_NAME --format onnx
+   ```
+2. Modify `lambda.js`:
+   ```javascript
+   const classifier = await pipeline('text-classification', 'MODEL_NAME');
+   ```
 
-Key Notes
-	1.	Model Optimization:
-The Dockerfile uses transformers-cli to pre-download models during build time, which helps reduce cold-start latency on AWS Lambda.
-	2.	Quantization:
-The quantized: true flag in lambda.js ensures smaller model sizes, resulting in faster inference and reduced memory usage.
-	3.	Security:
-Input validation is implemented to prevent malformed requests from reaching the model, improving stability and security.
-	4.	Cost Control:
-The memorySize and timeout values in serverless.yml are configured to support large models efficiently while keeping costs under control. (Defaults are set to AWS Lambda maximums.)
+## 🤝 Contributing
+PRs welcome! For major changes, open an issue first.
 
-⸻
-
-Quick Start Guide
-
-To use this template:
-	1.	Create a new GitHub repository and add these project files.
-	2.	Run npm install to install all required packages.
-	3.	Deploy the serverless API with:
-
-serverless deploy
+## License
+MIT
+```
