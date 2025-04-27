@@ -1,0 +1,67 @@
+Serverless LLM API with Node.js and AWS Lambda
+
+A template for deploying Large Language Models (LLMs) as serverless APIs using AWS Lambda and Docker.
+
+Features
+	•	🐳 Dockerized inference pipeline
+	•	⚡ Cold-start optimization
+	•	🔒 Error handling and input validation
+	•	📦 Serverless Framework deployment
+
+Setup
+	1.	Clone this repository:
+
+git clone https://github.com/your-username/serverless-llm-api.git
+cd serverless-llm-api
+
+
+	2.	Install dependencies:
+
+npm install
+
+
+	3.	Configure AWS credentials:
+
+aws configure
+
+
+	4.	Deploy:
+
+npm run deploy
+
+
+
+Usage
+
+Send a POST request to your deployed API:
+
+curl -X POST https://YOUR_API_URL/classify \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Serverless machine learning is amazing!"}'
+
+License
+
+MIT License
+
+⸻
+
+Key Notes
+	1.	Model Optimization:
+The Dockerfile uses transformers-cli to pre-download models during build time, which helps reduce cold-start latency on AWS Lambda.
+	2.	Quantization:
+The quantized: true flag in lambda.js ensures smaller model sizes, resulting in faster inference and reduced memory usage.
+	3.	Security:
+Input validation is implemented to prevent malformed requests from reaching the model, improving stability and security.
+	4.	Cost Control:
+The memorySize and timeout values in serverless.yml are configured to support large models efficiently while keeping costs under control. (Defaults are set to AWS Lambda maximums.)
+
+⸻
+
+Quick Start Guide
+
+To use this template:
+	1.	Create a new GitHub repository and add these project files.
+	2.	Run npm install to install all required packages.
+	3.	Deploy the serverless API with:
+
+serverless deploy
